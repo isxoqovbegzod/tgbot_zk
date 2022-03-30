@@ -50,7 +50,7 @@ def contact_handler(message):
         rkr = ReplyKeyboardRemove(True)
         db_utils.ask_user_contact(user, phone_num)
         bot.set_state(message.from_user.id, UserState.main_menu, message.chat.id)
-        bot.send_message(message.chat.id, "Ma'lumotlar to'g'ri   kiritildimi\n<strong>ha</strong> yoki <strong>yoq</strong>", parse_mode='html', reply_markup=rkr)
+        bot.send_message(message.chat.id, "Ma'lumotlar to'g'ri  kiritildimi\n<strong>ha</strong> yoki <strong>yoq</strong>", parse_mode='html', reply_markup=rkr)
 
 
 @bot.message_handler(state=UserState.main_menu)
