@@ -69,6 +69,7 @@ def menu_lavash(chat_id, lang):
     rkm = ReplyKeyboardMarkup(True, row_width=1)
     photo3 = open('/home/zk/Downloads/photo_2022-03-31_11-43-21.jpg', 'rb')
     ikm.row_width = 2
+
     ikm.add(InlineKeyboardButton('15 000', callback_data='1'), InlineKeyboardButton('20 000', callback_data='2'))
     rkm.add('Karzinka', 'Orqaga')
     bot.send_photo(chat_id, photo3, ASKE_LAVASH[user.lang], reply_markup=ikm)
