@@ -78,9 +78,11 @@ def menu_lavash(chat_id, lang):
 
 # menu tanlanganligini korsatadi
 def menu_regix(message, lang):
+    user = db_utils.get_user(message.chat.id)
     print('REgix')
     if message.text == FUD_LAVASH[lang]:
         print('LAVASH TANLANDI')
+
         menu_lavash(message.chat.id, lang)
     elif message.text == XOT_DOG[lang]:
         print('HOD_DOG TsANLANDi')
