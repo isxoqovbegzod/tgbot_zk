@@ -83,7 +83,7 @@ def menu_regix(message, lang):
         print('LAVASH TANLANDI')
         menu_lavash(message.chat.id, lang)
     elif message.text == XOT_DOG[lang]:
-        print('HOD_DOG TANLANDi')
+        print('HOD_DOG TsANLANDi')
     else:
         print('ALiMARDON')
 
