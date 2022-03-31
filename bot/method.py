@@ -13,6 +13,7 @@ class UserState(StatesGroup):
     language = State() # creating instances of State class is enough from now
     contact = State()
     main_menu = State()
+    menu_lavash = State()
 
 # class UserState:
 #     start = 0
@@ -67,6 +68,11 @@ def ask_contact(chat_id, lang):
 
 
 
+
+
+   # irk = InlineKeyboardMarkup()
+   #  id_ = message.from_user.id
+   #  irk.add(InlineKeyboardButton("💠 CLICK****3844",callback_data='1'))
 
 def send_error_lang(chat_id, lang):
     bot.send_message(chat_id, ASK_LANGUAGE)

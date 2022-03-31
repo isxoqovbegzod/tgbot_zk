@@ -50,7 +50,7 @@ def contact_handler(message):
         rkr = ReplyKeyboardRemove(True)
         db_utils.ask_user_contact(user, phone_num)
         bot.set_state(message.from_user.id, UserState.main_menu, message.chat.id)
-        bot.send_message(message.chat.id, "Ma'lumotlar to'g'ri  kiritildimi\n<strong>ha</strong> yoki <strong>yoq</strong>", parse_mode='html', reply_markup=rkr)
+        bot.send_message(message.chat.id, INFORMA_ISCORRECT[user.lang], parse_mode='html', reply_markup=rkr)
 
 
 @bot.message_handler(state=UserState.main_menu)
@@ -59,6 +59,41 @@ def main_menu(message):
     rkm = ReplyKeyboardMarkup(True)
     rkm.add(FUD_LAVASH[user.lang], XOT_DOG[user.lang])
     bot.send_message(message.chat.id, MENU_WELCOME[user.lang], reply_markup=rkm)
+    menu_regix(message, user.lang)
+    # bot.set_state(message.chat.id, UserState.main_menu)
+
+
+def menu_lavash(chat_id, lang):
+    user = db_utils.get_user(chat_id)
+    ikm = InlineKeyboardMarkup()
+    rkm = ReplyKeyboardMarkup(True, row_width=1)
+    photo3 = open('/home/zk/Downloads/photo_2022-03-31_11-43-21.jpg', 'rb')
+    ikm.row_width = 2
+    ikm.add(InlineKeyboardButton('15 000', callback_data='1'), InlineKeyboardButton('20 000', callback_data='2'))
+    rkm.add('Karzinka', 'Orqaga')
+    bot.send_photo(chat_id, photo3, ASKE_LAVASH[user.lang], reply_markup=ikm)
+    bot.send_message(chat_id, '1', reply_markup=rkm)
+
+
+# menu tanlanganligini korsatadi
+def menu_regix(message, lang):
+    print('REgix')
+    if message.text == FUD_LAVASH[lang]:
+        print('LAVASH TANLANDI')
+        menu_lavash(message.chat.id, lang)
+    elif message.text == XOT_DOG[lang]:
+        print('HOD_DOG TANLANDi')
+    else:
+        print('ALiMARDON')
+
+
+@bot.callback_query_handler(func=lambda call: True)
+def callback_query(call):
+    user = db_utils.get_user(call.from_user.id)
+    if call.data == '1':
+        bot.answer_callback_query(call.id, ADD_KARZINKA_LAVASH_1[user.lang])
+    elif call.data == '2':
+        bot.answer_callback_query(call.id, ADD_KARZINKA_LAVASH_2[user.lang])
 
 
 bot.add_custom_filter(custom_filters.StateFilter(bot))
