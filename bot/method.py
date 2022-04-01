@@ -14,6 +14,7 @@ class UserState(StatesGroup):
     contact = State()
     main_menu = State()
     menu_lavash = State()
+    add_menu_15000 = State()
 
 # class UserState:
 #     start = 0
@@ -64,15 +65,19 @@ def ask_contact(chat_id, lang):
     print('state_contact')
     bot.send_message(chat_id, ASK_PHONE_NUMBER[lang], reply_markup=rkm)
 
+base = []
+def add_summa(summa):
+    ass = summa[0:6]
+    base.append(ass)
+    print(base)
 
 
+def res_karzinca(chat_id, lang):
+    user = db_utils.get_user(chat_id=chat_id)
+    rkm = ReplyKeyboardMarkup(True, row_width=1)
+    rkm.add('Dastavka', "Orqaga_")
+    bot.send_message(chat_id, 'aa', reply_markup=rkm)
 
-
-
-
-   # irk = InlineKeyboardMarkup()
-   #  id_ = message.from_user.id
-   #  irk.add(InlineKeyboardButton("💠 CLICK****3844",callback_data='1'))
 
 def send_error_lang(chat_id, lang):
     bot.send_message(chat_id, ASK_LANGUAGE)

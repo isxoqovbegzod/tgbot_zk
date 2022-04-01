@@ -1,6 +1,8 @@
 import telebot
 from telebot.types import ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove
-from users.models import User
+
+import users.models
+from users.models import User, Product
 from bot .method import *
 from bot.const import *
 from telebot import custom_filters
@@ -65,27 +67,28 @@ def main_menu(message):
 
 def menu_lavash(chat_id, lang):
     user = db_utils.get_user(chat_id)
+    # users.models.Product.image
     ikm = InlineKeyboardMarkup()
     rkm = ReplyKeyboardMarkup(True, row_width=1)
-    photo3 = open('/home/zk/Downloads/photo_2022-03-31_11-43-21.jpg', 'rb')
-    ikm.row_width = 2
 
-    ikm.add(InlineKeyboardButton('15 000', callback_data='1'), InlineKeyboardButton('20 000', callback_data='2'))
-    rkm.add('Karzinka', 'Orqaga')
+    photo3 = user.product.image
+    ikm.row_width = 3
+    ikm.add(InlineKeyboardButton('-', callback_data='1'), InlineKeyboardButton('15 000', callback_data='2'), InlineKeyboardButton('+', callback_data='3'))
+    ikm.add(InlineKeyboardButton('karzinkag', callback_data='5'))
+    rkm.add(KARZINKA[lang], 'Orqaga')
     bot.send_photo(chat_id, photo3, ASKE_LAVASH[user.lang], reply_markup=ikm)
     bot.send_message(chat_id, '1', reply_markup=rkm)
 
 
 # menu tanlanganligini korsatadi
 def menu_regix(message, lang):
-    user = db_utils.get_user(message.chat.id)
-    print('REgix')
     if message.text == FUD_LAVASH[lang]:
         print('LAVASH TANLANDI')
-
         menu_lavash(message.chat.id, lang)
     elif message.text == XOT_DOG[lang]:
         print('HOD_DOG TsANLANDi')
+    elif message.text == KARZINKA[lang]:
+        res_karzinca(message.chat.id, lang)
     else:
         print('ALiMARDON')
 
@@ -97,6 +100,13 @@ def callback_query(call):
         bot.answer_callback_query(call.id, ADD_KARZINKA_LAVASH_1[user.lang])
     elif call.data == '2':
         bot.answer_callback_query(call.id, ADD_KARZINKA_LAVASH_2[user.lang])
+    elif call.data == '3':
+        bot.answer_callback_query(call.id, "qosd")
+
+@bot.message_handler(state=UserState.add_menu_15000)
+def add_menu_15000(message):
+    print("olma")
+
 
 
 bot.add_custom_filter(custom_filters.StateFilter(bot))

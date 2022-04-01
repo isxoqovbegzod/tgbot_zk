@@ -22,14 +22,20 @@ class User(models.Model):
 class Category(models.Model):
     title = models.CharField(max_length=50)
 
+    def __str__(self):
+        return self.title
+
 
 class Product(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='product')
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, related_name='products', null=True)
-    title = models.CharField(max_length=50)
+    title = models.JSONField()
     image = models.ImageField(upload_to=upload_to, null=True)
     price = models.FloatField()
     description = models.TextField(null=True)
 
+    def __str__(self):
+        return self.title
 
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')

@@ -9,6 +9,7 @@ RUSSIA = 'Russia'
 ASK_LANGUAGE = "🇷🇺 Выберите язык\n🇺🇿 Tilni tanlang"
 
 
+
 ASK_PHONE_NUMBER = {
     "uz": "📱  Mobil raqamni kiriting Raqamingizni taqdim etish uchun quyidagi ⬇️ tugmasini bosing.",
     "ru": "📱 Введите мобильный номер Нажмите на кнопку ниже ⬇️, чтобы поделиться своим номером.",
@@ -64,3 +65,15 @@ INFORMA_ISCORRECT = {
     "uz": "Ma'lumotlar to'g'ri  kiritildimi\n<strong>yes</strong> yoki <strong>yoq</strong>",
     'ru': "Данные введены правильно \n <strong> yes </strong> или <strong> no </strong>"
 }
+
+
+KARZINKA = {
+    'uz': 'KARZINKA',
+    'ru': 'КАРЗИНКА'
+}
+
+
+
+
+
+
