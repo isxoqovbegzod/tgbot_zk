@@ -101,7 +101,7 @@ def callback_query(call):
     elif call.data == '2':
         bot.answer_callback_query(call.id, ADD_KARZINKA_LAVASH_2[user.lang])
     elif call.data == '3':
-        bot.answer_callback_query(call.id, "qosd")
+        bot.answer_callback_query(call.id, "+")
 
 @bot.message_handler(state=UserState.add_menu_15000)
 def add_menu_15000(message):
